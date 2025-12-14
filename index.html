@@ -67,6 +67,13 @@
     .member:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
     .member .name{font-weight:600;color:#fff;font-size:16px}
     .member .role{font-size:14px;color:#8f98a0;margin-top:4px}
+
+    /* ===== КНОПКИ-ИГРУШКИ ===== */
+    .mini-btn{margin-left:6px;padding:6px 8px;border:1px solid #66c0f4;border-radius:6px;background:transparent;color:#66c0f4;font-size:14px;cursor:pointer;transition:.2s}
+    .mini-btn:hover{background:#66c0f4;color:#0e1419;transform:scale(1.1)}
+
+    /* ===== ЦИТАТА ДНЯ ===== */
+    #dailyQuote{margin-top:12px;font-size:13px;color:#8f98a0;font-style:italic;text-align:center}
   </style>
 </head>
 
@@ -86,6 +93,9 @@
     <div class="input-row">
       <input id="link" type="text" placeholder="https://steamcommunity.com/…" />
       <button id="checkBtn">Проверить</button>
+      <button id="copyLinkBtn" class="mini-btn" title="Скопировать ссылку">📋</button>
+      <button id="luckBtn" class="mini-btn" title="Случайный инвентарь">🎲</button>
+      <button id="resetBtn" class="mini-btn" title="Очистить">🗑️</button>
     </div>
 
     <div>
@@ -95,6 +105,7 @@
 
     <div id="result"></div>
     <div id="totem"></div>
+    <div id="dailyQuote"></div>
   </div>
 
   <!-- ===== КРАСИВЫЕ КАРТОЧКИ РАЗРАБОВ ===== -->
@@ -143,6 +154,27 @@
       bgMusic.play()
         .then(() => bgBtn.textContent = 'Фон играет')
         .catch(err => alert('Аудио заблокировано: ' + err));
+    };
+
+    /* Кнопки-игрушки */
+    document.getElementById('copyLinkBtn').onclick = () => {
+      navigator.clipboard.writeText(input.value);
+      document.getElementById('copyLinkBtn').textContent = '✅';
+      setTimeout(() => document.getElementById('copyLinkBtn').textContent = '📋', 1000);
+    };
+
+    document.getElementById('luckBtn').onclick = () => {
+      const luckIDs = ['76561198390944700','76561198856044454','76561199022038566'];
+      input.value = 'https://steamcommunity.com/profiles/' + luckIDs[Math.floor(Math.random()*luckIDs.length)];
+      btn.click();
+    };
+
+    document.getElementById('resetBtn').onclick = () => {
+      input.value = '';
+      result.innerHTML = '';
+      totem.style.display = 'none';
+      input.focus();
+      input.animate([{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:200});
     };
 
     /* Inventory check */
@@ -195,6 +227,19 @@
         setTimeout(()=>span.style.transform='translateY(0)',300);
       }
     }
+
+    /* ===== ЦИТАТА ДНЯ ===== */
+    const quotes=[
+      'Я куплю тебе дом. — Иван Золо',
+      'Скины не главное, главное — душа. — СтРоГо',
+      'Не переживай, у тебя всё получится. — Саша1',
+      'Ctrl+C, Ctrl+V — мой путь. — Иван',
+      'Пишу, чтобы не пинали. — Саша2',
+      'Случайный инвентарь — это судьба. — Евгения',
+      'Главное — не количество скинов, а их качество. — Саша2'
+    ];
+    const today=new Date().getDate();
+    document.getElementById('dailyQuote').textContent=quotes[today%quotes.length];
   </script>
 </body>
 </html>
