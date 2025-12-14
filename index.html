@@ -58,6 +58,15 @@
 
     #totem{margin-top:20px;font-size:18px;font-weight:600;animation:slideUp 0.6s ease-out}
     @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ===== КРАСИВЫЕ КАРТОЧКИ РАЗРАБОВ ===== */
+    .team{margin-top:60px;padding:40px 20px;width:100%;max-width:900px;text-align:center;border-top:1px solid #2a475e}
+    .team h2{margin-bottom:24px;font-size:22px;color:#fff}
+    .team-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+    .member{background:#16202d;border-radius:12px;padding:16px;width:140px;box-shadow:0 8px 20px rgba(0,0,0,.25);transition:transform .2s,box-shadow .2s}
+    .member:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
+    .member .name{font-weight:600;color:#fff;font-size:16px}
+    .member .role{font-size:14px;color:#8f98a0;margin-top:4px}
   </style>
 </head>
 
@@ -88,15 +97,30 @@
     <div id="totem"></div>
   </div>
 
-  <!-- ========== КОМАНДА (без фоток сверху) ========== -->
+  <!-- ===== КРАСИВЫЕ КАРТОЧКИ РАЗРАБОВ ===== -->
   <section class="team">
     <h2>Команда разработчиков</h2>
     <div class="team-grid">
-      <div class="member"><p class="name">Максим</p><p class="role">Главный тимлид<br>(держит Go за хвост)</p></div>
-      <div class="member"><p class="name">Евгения</p><p class="role">Фронт-фея<br>(pixel-powered)</p></div>
-      <div class="member"><p class="name">Саша1</p><p class="role">Тимлид-перегруз<br>(два стула – один Саша)</p></div>
-      <div class="member"><p class="name">Иван</p><p class="role">Базист<br>(владеет Ctrl+C и Ctrl+V)</p></div>
-      <div class="member"><p class="name">Саша2</p><p class="role">Технический писатель<br>(пишет, чтобы не пинали)</p></div>
+      <div class="member">
+        <p class="name">Максим</p>
+        <p class="role">Главный тимлид<br>(держит Go за хвост)</p>
+      </div>
+      <div class="member">
+        <p class="name">Евгения</p>
+        <p class="role">Фронт-фея<br>(pixel-powered)</p>
+      </div>
+      <div class="member">
+        <p class="name">Саша1</p>
+        <p class="role">Тимлид-перегруз<br>(два стула – один Саша)</p>
+      </div>
+      <div class="member">
+        <p class="name">Иван</p>
+        <p class="role">Базист<br>(владеет Ctrl+C и Ctrl+V)</p>
+      </div>
+      <div class="member">
+        <p class="name">Саша2</p>
+        <p class="role">Технический писатель<br>(пишет, чтобы не пинали)</p>
+      </div>
     </div>
   </section>
 
@@ -165,7 +189,6 @@
     }
     function show(msg,cls){
       out.innerHTML = `<span class="${cls}">${msg}</span>`;
-      // анимация цифр
       const span = out.querySelector('span');
       if(span && cls==='success'){
         span.style.transform='translateY(-4px)';
