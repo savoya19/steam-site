@@ -150,7 +150,7 @@
       lock(true);
       totem.style.display='none';
       try{
-        const res = await fetch('http://localhost:8080/check',{
+                const res = await fetch('https://steam-checker-api-6sb6.onrender.com/check',{
           method:'POST',
           headers:{'Content-Type':'application/json'},
           body: JSON.stringify({link:val})
@@ -187,4 +187,5 @@
     }
   </script>
 </body>
+
 </html>
