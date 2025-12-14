@@ -94,9 +94,6 @@
     <div class="input-row">
       <input id="link" type="text" placeholder="https://steamcommunity.com/…" />
       <button id="checkBtn">Проверить</button>
-      <button id="copyLinkBtn" class="mini-btn" title="Скопировать ссылку">📋</button>
-      <button id="luckBtn" class="mini-btn" title="Случайный инвентарь">🎲</button>
-      <button id="resetBtn" class="mini-btn" title="Очистить">🗑️</button>
     </div>
 
     <div>
@@ -155,27 +152,6 @@
       bgMusic.play()
         .then(() => bgBtn.textContent = 'Фон играет')
         .catch(err => alert('Аудио заблокировано: ' + err));
-    };
-
-    /* Кнопки-игрушки */
-    document.getElementById('copyLinkBtn').onclick = () => {
-      navigator.clipboard.writeText(input.value);
-      document.getElementById('copyLinkBtn').textContent = '✅';
-      setTimeout(() => document.getElementById('copyLinkBtn').textContent = '📋', 1000);
-    };
-
-    document.getElementById('luckBtn').onclick = () => {
-      const luckIDs = ['76561198390944700','76561198856044454','76561199022038566'];
-      input.value = 'https://steamcommunity.com/profiles/' + luckIDs[Math.floor(Math.random()*luckIDs.length)];
-      btn.click();
-    };
-
-    document.getElementById('resetBtn').onclick = () => {
-      input.value = '';
-      result.innerHTML = '';
-      totem.style.display = 'none';
-      input.focus();
-      input.animate([{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:200});
     };
 
     /* Inventory check */
@@ -244,4 +220,3 @@
   </script>
 </body>
 </html>
-
