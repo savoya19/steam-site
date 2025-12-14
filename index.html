@@ -17,10 +17,14 @@
       justify-content:center;
       flex-direction:column;
     }
-    /* боковые картинки */
+    /* боковые картинки-заглушки */
     .side-img{position:fixed;top:50%;transform:translateY(-50%);width:120px;height:120px;object-fit:cover;border-radius:8px;z-index:10}
     .left-img{left:20px}
     .right-img{right:20px}
+
+    /* ===== КРАСОТА ===== */
+    .card{animation:fadeIn 0.8s ease-out}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
     .card{
       background:#1b2838;
@@ -35,14 +39,16 @@
     .input-row{display:flex;gap:8px;margin-top:16px}
     .input-row input{flex:1;padding:14px 16px;border:1px solid #2a475e;border-radius:8px;background:#16202d;color:#fff;font-size:16px;transition:border .2s}
     .input-row input:focus{outline:none;border-color:#66c0f4}
-    .input-row button{flex:0 0 120px;padding:14px;border:none;border-radius:8px;background:linear-gradient(90deg,#66c0f4 0%,#417a9b 100%);color:#fff;font-size:16px;font-weight:600;cursor:pointer;transition:transform .15s}
+    .input-row button{flex:0 0 120px;padding:14px;border:none;border-radius:8px;background:linear-gradient(90deg,#66c0f4 0%,#417a9b 100%);color:#fff;font-size:16px;font-weight:600;cursor:pointer;transition:transform .15s;position:relative;overflow:hidden}
+    .input-row button::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,#fff,transparent);transition:left 0.6s}
+    .input-row button:hover::before{left:100%}
     .input-row button:hover{transform:translateY(-2px)}
     .input-row button:active{transform:translateY(0)}
     #result{margin-top:24px;min-height:24px;font-size:18px}
     .error{color:#ff9e9e}
     .success{color:#a1eac8}
-    .loader{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
+    .loader{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite,pulse 1s ease-in-out infinite}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
 
     #mamaBtn{margin-top:12px;padding:10px 18px;border:1px solid #8f98a0;border-radius:8px;background:transparent;color:#8f98a0;font-size:14px;cursor:pointer;transition:.2s}
     #mamaBtn:hover{background:#8f98a0;color:#0e1419}
@@ -50,15 +56,8 @@
     #bgBtn{margin-left:8px;padding:10px 18px;border:1px solid #66c0f4;border-radius:8px;background:transparent;color:#66c0f4;font-size:14px;cursor:pointer;transition:.2s}
     #bgBtn:hover{background:#66c0f4;color:#0e1419}
 
-    #totem{margin-top:20px;font-size:18px;font-weight:600}
-
-    .team{margin-top:60px;padding:40px 20px;width:100%;max-width:900px;text-align:center;border-top:1px solid #2a475e}
-    .team h2{margin-bottom:24px;font-size:22px;color:#fff}
-    .team-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-    .member{background:#16202d;border-radius:12px;padding:16px;width:140px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
-    .member img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 8px;display:block}
-    .member .name{font-weight:600;color:#fff}
-    .member .role{font-size:14px;color:#8f98a0}
+    #totem{margin-top:20px;font-size:18px;font-weight:600;animation:slideUp 0.6s ease-out}
+    @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
 
@@ -89,35 +88,15 @@
     <div id="totem"></div>
   </div>
 
-  <!-- ========== КОМАНДА ========== -->
+  <!-- ========== КОМАНДА (без фоток сверху) ========== -->
   <section class="team">
     <h2>Команда разработчиков</h2>
     <div class="team-grid">
-      <div class="member">
-        <img src="devs/maksim.jpg" alt="Максим" />
-        <p class="name">Максим</p>
-        <p class="role">Главный тимлид<br>(держит Go за хвост)</p>
-      </div>
-      <div class="member">
-        <img src="devs/evgenia.jpg" alt="Евгения" />
-        <p class="name">Евгения</p>
-        <p class="role">Фронт-фея<br>(pixel-powered)</p>
-      </div>
-      <div class="member">
-        <img src="devs/sasha1.jpg" alt="Саша" />
-        <p class="name">Саша1</p>
-        <p class="role">Тимлид-перегруз<br>(два стула – один Саша)</p>
-      </div>
-      <div class="member">
-        <img src="devs/vanya.jpg" alt="Иван" />
-        <p class="name">Иван</p>
-        <p class="role">Базист<br>(владеет Ctrl+C и Ctrl+V)</p>
-      </div>
-      <div class="member">
-        <img src="devs/sasha2.jpg" alt="Саша" />
-        <p class="name">Саша2</p>
-        <p class="role">Технический писатель<br>(пишет, чтобы не пинали)</p>
-      </div>
+      <div class="member"><p class="name">Максим</p><p class="role">Главный тимлид<br>(держит Go за хвост)</p></div>
+      <div class="member"><p class="name">Евгения</p><p class="role">Фронт-фея<br>(pixel-powered)</p></div>
+      <div class="member"><p class="name">Саша1</p><p class="role">Тимлид-перегруз<br>(два стула – один Саша)</p></div>
+      <div class="member"><p class="name">Иван</p><p class="role">Базист<br>(владеет Ctrl+C и Ctrl+V)</p></div>
+      <div class="member"><p class="name">Саша2</p><p class="role">Технический писатель<br>(пишет, чтобы не пинали)</p></div>
     </div>
   </section>
 
@@ -150,7 +129,7 @@
       lock(true);
       totem.style.display='none';
       try{
-                const res = await fetch('https://steam-checker-api-6sb6.onrender.com/check',{
+        const res = await fetch('https://postavte5zazolo.com.up.railway.app/check',{
           method:'POST',
           headers:{'Content-Type':'application/json'},
           body: JSON.stringify({link:val})
@@ -169,11 +148,13 @@
 
     function showTotem(rub){
       let animal='';
-      if(rub<15000)      animal='Иван Золо (дешёвый но душевный)';
-      else if(rub<50000) animal='Строгий стример (без скидок)';
-      else               animal='Симп-симп (богатый и щедрый)';
+      if(rub<=20000)      animal='Иван Золо';
+      else if(rub<=500000) animal='StRoGo';
+      else if(rub<=1200000) animal='S1mple';
+      else               animal='Donk';
       totem.innerHTML=`Твоё тотемное животное: <span style="color:#66c0f4">${animal}</span>`;
       totem.style.display='block';
+      totem.style.animation='slideUp 0.6s ease-out';
     }
 
     function lock(on){
@@ -184,8 +165,13 @@
     }
     function show(msg,cls){
       out.innerHTML = `<span class="${cls}">${msg}</span>`;
+      // анимация цифр
+      const span = out.querySelector('span');
+      if(span && cls==='success'){
+        span.style.transform='translateY(-4px)';
+        setTimeout(()=>span.style.transform='translateY(0)',300);
+      }
     }
   </script>
 </body>
-
 </html>
